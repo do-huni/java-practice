@@ -1,6 +1,10 @@
 class InterfaceExample{
     public static void main(String[] args){
-        
+        Tank t1 = new Tank( 30 );
+        System.out.println(t1.isGroundUnit());
+        SCV scv1 = new SCV( 20 );
+        t1.damaged(10);
+        scv1.repair(t1);
     }
 }
 
@@ -18,4 +22,63 @@ interface PlayingCard {
     
     public abstract String getCardNumber();
     String getCardKind();// 이렇게 써도 public abstract String
+    
+}
+
+//실습예제
+
+class Unit {
+    int hp;
+    final int MAXHP;
+    Unit(int hp){
+        this.hp = hp;
+        this.MAXHP = hp;
+    }
+    void damaged(int damage){
+        this.hp -= damage;
+        if (this.hp < 1){
+            System.out.println("객체가 사망했습니다.");
+        }
+    }
+    Boolean isGroundUnit(){
+        return (this instanceof GroundUnit);
+    }    
+    Boolean isAirUnit(){
+        return (this instanceof AirUnit);
+    }    
+}
+
+class GroundUnit extends Unit{
+    GroundUnit(int hp)    { super(hp); }
+}
+
+class AirUnit extends Unit{
+    AirUnit(int hp)       { super(hp); }
+}
+
+class Tank extends GroundUnit implements Repairable{
+    Tank(int hp)     { super(hp); }
+}
+
+class Marine extends GroundUnit{
+    Marine(int hp)     {super(hp);}
+}
+
+class SCV extends GroundUnit implements Repairable{
+    SCV(int hp)        {super(hp);}
+    
+    void repair(Repairable r){
+        if (r instanceof Unit){
+            Unit u = (Unit) r;
+            System.out.printf("현재 체력 %d, 최대 체력: %d 수리를 시작합니다.\n", u.hp, u.MAXHP);            
+            while (u.hp < u.MAXHP){
+                u.hp++;
+            }
+            System.out.printf("현재 체력 %d, 최대 체력: %d 수리가 끝났습니다.\n", u.hp, u.MAXHP);
+        }
+    }
+}
+
+interface Repairable{
+    
 }
