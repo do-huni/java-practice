@@ -25,6 +25,15 @@ class EH{
         Exception > RuntimeException > ...
         */
         (new TryZeroDiv()).start();
+        System.out.println("======================================");
+        (new IntentionedException()).start();
+        System.out.println("======================================");
+        ExceptionDeclaration ed1 = new ExceptionDeclaration();
+        try{
+        ed1.callThrowException();
+        } catch(Exception e){
+            System.out.println("예외처리함");
+        }
         
     }
 }
@@ -46,5 +55,35 @@ class TryZeroDiv{
                 System.out.println("Exception occured"); 
             }
         }
+    }
+}
+
+class IntentionedException{
+    void start(){
+        try{
+            Exception e = new Exception("고의로 발생 시켰음");
+            throw e;
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+        System.out.println("aptjem가 종료됨.");
+    }
+}
+
+class ExceptionDeclaration{
+    void throwException()
+        throws Exception{
+        System.out.println("throwException 메서드가 시작됨.");
+        throw new Exception();
+        //System.out.println("throwException 메서드가 종료됨.");
+        //=> unreachable statement. 오류남
+    }
+    void callThrowException()
+        throws Exception{
+        /* catch 안해주면 오류남,
+        정확한 원리는 throws를 통해 메서드에 예외를 선언해두면 메서드를 호출한 메서드에게 예외를 전달하는 것.
+        따라서 throwException에서 선언된 예외는 그것 안 혹은 callThrowException 혹은 main 메서드에서 처리되어야 함. */
+        this.throwException();
     }
 }
