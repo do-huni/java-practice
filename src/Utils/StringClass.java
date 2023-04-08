@@ -16,5 +16,7 @@ class StringClass{
         //""의 정체
         String str5 = "";
         System.out.println(str5.length());
+        //"" => 길이가 0인 char[]
+        
     }
 }
