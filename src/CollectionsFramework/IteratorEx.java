@@ -7,11 +7,17 @@ class IteratorEx{
         Collection c = new ArrayList();
         c.add('1');
         c.add('2');        
+        c.add('3');
         Iterator it = c.iterator();
-
+        //listIterator() 메서드는 ArrayList class에만 있기 때문에 Collection으로 선언된 참조변수를 ArrayList로 형변환 해준다.
+        ListIterator liit = ((ArrayList)c).listIterator();
         
         while(it.hasNext()){
             System.out.println(it.next());
+            liit.next();
+        }
+        while(liit.hasPrevious()){
+            System.out.println(liit.previous());
         }
     }
 }
