@@ -11,5 +11,7 @@ class HashSetEx{
             set.add(objArr[i]);
         }
         System.out.println(set); //중복값처럼 출력되는 것은 서로 다른 객체이기 때문. (자료형 다름))
+        
+        
     }
 }
