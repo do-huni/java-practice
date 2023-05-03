@@ -2,6 +2,9 @@ class LambdaEx1{
     public static void main(String[] args){
 
         MyFunction1 f = (int a, int b) -> a > b ? a : b;
+        //추상인터페이스의 익명객체를 람다식으로 대체함.
+        //왜 되는가? 사실은 람다식도 익명객체이기 때문.
+        
         System.out.println(f.max(10,20));
         
         MyVoid v1 = () -> System.out.println("f1.run()");
@@ -10,7 +13,7 @@ class LambdaEx1{
             public void run(){
                 System.out.println("f2.run()");
             }
-        };
+        };`
         
         MyVoid v3 = getMyVoid();
         
@@ -25,11 +28,11 @@ class LambdaEx1{
     }
     
     
-    static void execute(MyVoid v){
+    static void execute(MyVoid v){ //매개변수가 람다식
         v.run();
     }
 
-    static MyVoid getMyVoid(){
+    static MyVoid getMyVoid(){ //반환타입이 람다식
         return () -> System.out.println("v3.run()");
     }
             
