@@ -45,5 +45,7 @@ class StreamEx2{
             .map(s -> s.substring(s.indexOf('.') +1)) //확장자 부분만 추출
             .peek(s-> System.out.printf("extension = %s", s))
             .forEach(n -> System.out.println());
+        
+        
     }
 }
